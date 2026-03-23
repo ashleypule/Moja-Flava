@@ -1,0 +1,61 @@
+require('dotenv').config();
+
+const path = require('path');
+const express = require('express');
+const session = require('express-session');
+const { initializeDatabase } = require('./db/database');
+const { publicRouter } = require('./routes/publicRoutes');
+const { authRouter } = require('./routes/authRoutes');
+const { appRouter } = require('./routes/appRoutes');
+
+const app = express();
+const PORT = Number(process.env.PORT || 3000);
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '..', 'views'));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'development_secret_change_me',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24
+    }
+  })
+);
+
+app.use((req, res, next) => {
+  const cart = req.session.cart || {};
+  const cartCount = Object.values(cart).reduce((sum, qty) => sum + Number(qty || 0), 0);
+
+  res.locals.currentUser = {
+    id: req.session.userId || null,
+    name: req.session.userName || null
+  };
+  res.locals.cartCount = cartCount;
+  next();
+});
+
+app.use(publicRouter);
+app.use(authRouter);
+app.use(appRouter);
+
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.status(500).send('Something went wrong. Please try again.');
+});
+
+initializeDatabase()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Moja Flava app running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Failed to initialize database', error);
+    process.exit(1);
+  });

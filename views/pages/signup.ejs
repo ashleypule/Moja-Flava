@@ -1,0 +1,33 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container auth-page">
+  <section class="card auth-card">
+    <h2>Create your account</h2>
+    <p class="muted">Join Moja Flava and start ordering in minutes.</p>
+
+    <% if (error) { %>
+      <div class="alert error"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/signup" class="form-grid">
+      <label>
+        Full Name
+        <input type="text" name="fullName" placeholder="John Doe" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" placeholder="you@example.com" required />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" placeholder="At least 6 characters" required minlength="6" />
+      </label>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    <p class="switch-text">Already have an account? <a href="/login">Login</a></p>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

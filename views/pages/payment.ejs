@@ -1,0 +1,37 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container page-space">
+  <section class="card payment-card">
+    <h2>Payment (Test Mode)</h2>
+    <p class="muted">Order: <strong><%= order.order_number %></strong> · Total: <strong>R <%= Number(order.total).toFixed(2) %></strong></p>
+
+    <div class="alert info">
+      This is a testing flow only. No real money will be charged.
+    </div>
+
+    <div class="payment-grid">
+      <article>
+        <h3>Paystack Sandbox</h3>
+        <p class="muted">Public key configured for testing:</p>
+        <code><%= paystackPublicKey %></code>
+        <form method="post" action="/checkout/payment/<%= order.id %>/pay">
+          <input type="hidden" name="provider" value="paystack" />
+          <button type="submit" class="btn btn-primary btn-block">Pay with Paystack (Test)</button>
+        </form>
+      </article>
+
+      <article>
+        <h3>PayPal Sandbox</h3>
+        <p class="muted">Client ID configured for testing:</p>
+        <code><%= paypalClientId %></code>
+        <form method="post" action="/checkout/payment/<%= order.id %>/pay">
+          <input type="hidden" name="provider" value="paypal" />
+          <button type="submit" class="btn btn-outline btn-block">Pay with PayPal (Test)</button>
+        </form>
+      </article>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

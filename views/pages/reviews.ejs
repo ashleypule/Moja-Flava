@@ -1,0 +1,77 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container page-space">
+  <div class="page-header">
+    <h2>Customer Reviews</h2>
+    <p class="muted">Read what customers are saying and share your experience.</p>
+  </div>
+
+  <% if (success) { %>
+    <div class="alert success"><%= success %></div>
+  <% } %>
+
+  <% if (error) { %>
+    <div class="alert error"><%= error %></div>
+  <% } %>
+
+  <section class="card review-form-card">
+    <h3>Post a Review</h3>
+
+    <% if (!(currentUser && currentUser.id)) { %>
+      <div class="alert info">
+        Please <a href="/login">login</a> to post a review.
+      </div>
+    <% } else { %>
+      <form method="post" action="/reviews" class="form-grid">
+        <label>
+          Rating
+          <select name="rating" required>
+            <option value="">Select rating</option>
+            <% for (let score = 5; score >= 1; score--) { %>
+              <option value="<%= score %>" <%= String(formValues.rating || '') === String(score) ? 'selected' : '' %>>
+                <%= score %> star<%= score === 1 ? '' : 's' %>
+              </option>
+            <% } %>
+          </select>
+        </label>
+
+        <label>
+          Comment
+          <textarea
+            name="comment"
+            rows="4"
+            maxlength="500"
+            required
+            placeholder="Tell us what you loved..."
+          ><%= formValues.comment || '' %></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    <% } %>
+  </section>
+
+  <section class="card">
+    <h3>Recent Reviews</h3>
+
+    <% if (!reviews.length) { %>
+      <p class="muted">No reviews yet. Be the first to post one.</p>
+    <% } else { %>
+      <div class="reviews-list">
+        <% reviews.forEach((review) => { %>
+          <article class="review-item">
+            <div class="review-item-head">
+              <strong><%= review.user_name %></strong>
+              <span class="muted"><%= new Date(review.created_at).toLocaleString() %></span>
+            </div>
+            <p class="review-stars"><%= '★'.repeat(Number(review.rating)) %><%= '☆'.repeat(5 - Number(review.rating)) %></p>
+            <p><%= review.comment %></p>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

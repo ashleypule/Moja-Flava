@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "full_name": "Viddie",
+      "email": "viddie@gmail.com",
+      "password_hash": "$2a$10$XJ1XvgtekhNrb99RXgGb7OeGYb2n2HEh14on1e5o8bMnMmhu4lkIm",
+      "created_at": "2026-03-19T14:46:34.618Z"
+    }
+  ],
+  "menu_items": [
+    {
+      "id": 1,
+      "name": "Signature BBQ Wings",
+      "description": "Smoky grilled wings with house BBQ glaze",
+      "price": 89.99,
+      "category": "Main",
+      "created_at": "2026-03-19T14:21:48.196Z",
+      "image": "bbqwings.avif"
+    },
+    {
+      "id": 2,
+      "name": "Moja Loaded Burger",
+      "description": "Beef patty, cheddar, onion rings, spicy mayo",
+      "price": 109.99,
+      "category": "Main",
+      "created_at": "2026-03-19T14:21:48.197Z",
+      "image": "loadedburger.png"
+    },
+    {
+      "id": 9,
+      "name": "Kota",
+      "description": "South African street-style kota loaded with flavor",
+      "price": 74.99,
+      "category": "Wraps",
+      "image": "kota.jpg",
+      "created_at": "2026-03-19T14:58:58.651Z"
+    },
+    {
+      "id": 4,
+      "name": "Veggie Power Bowl",
+      "description": "Roasted veggies, quinoa, avocado dressing",
+      "price": 79.99,
+      "category": "Healthy",
+      "created_at": "2026-03-19T14:21:48.198Z",
+      "image": "veggiebowl.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Family Feast Platter",
+      "description": "Mixed meats, fries, salads and dips",
+      "price": 249.99,
+      "category": "Combo",
+      "created_at": "2026-03-19T14:21:48.198Z",
+      "image": "familyplatter.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Chilli Cheese Fries",
+      "description": "Fries topped with melted cheese and jalapeños",
+      "price": 54.99,
+      "category": "Sides",
+      "created_at": "2026-03-19T14:21:48.199Z",
+      "image": "cheesefries.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Classic Milkshake",
+      "description": "Creamy vanilla shake with whipped topping",
+      "price": 39.99,
+      "category": "Drinks",
+      "created_at": "2026-03-19T14:21:48.199Z",
+      "image": "milkshake.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Tropical Cooler",
+      "description": "Fresh pineapple, mint and citrus fizz",
+      "price": 34.99,
+      "category": "Drinks",
+      "created_at": "2026-03-19T14:21:48.200Z",
+      "image": "tropicalcooler.webp"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "order_number": "MF-33095647",
+      "tracking_code": "TRK-485C67",
+      "user_id": 1,
+      "items_json": "[{\"id\":1,\"name\":\"Signature BBQ Wings\",\"description\":\"Smoky grilled wings with house BBQ glaze\",\"price\":89.99,\"category\":\"Main\",\"image\":\"bbqwings.avif\",\"quantity\":1,\"lineTotal\":89.99},{\"id\":2,\"name\":\"Moja Loaded Burger\",\"description\":\"Beef patty, cheddar, onion rings, spicy mayo\",\"price\":109.99,\"category\":\"Main\",\"image\":\"loadedburger.png\",\"quantity\":1,\"lineTotal\":109.99},{\"id\":8,\"name\":\"Tropical Cooler\",\"description\":\"Fresh pineapple, mint and citrus fizz\",\"price\":34.99,\"category\":\"Drinks\",\"image\":\"tropicalcooler.webp\",\"quantity\":1,\"lineTotal\":34.99}]",
+      "subtotal": 234.97,
+      "delivery_fee": 20,
+      "total": 254.97,
+      "payment_provider": "paystack",
+      "payment_status": "paid_test",
+      "order_status": "Payment Confirmed",
+      "address_line": "TUT Aubrey matla",
+      "city": "Pretoria",
+      "notes": null,
+      "created_at": "2026-03-19T15:11:35.647Z"
+    }
+  ],
+  "counters": {
+    "users": 2,
+    "menu_items": 10,
+    "orders": 2,
+    "reviews": 2
+  },
+  "reviews": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "user_name": "Viddie",
+      "rating": 4,
+      "comment": "Easy to navigate and use, fasst delivery.",
+      "created_at": "2026-03-23T08:19:58.020Z"
+    }
+  ]
+}

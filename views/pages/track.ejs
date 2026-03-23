@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container page-space">
+  <section class="card auth-card">
+    <h2>Track an Order</h2>
+    <p class="muted">Enter your tracking code to see current status.</p>
+
+    <form method="post" action="/track" class="form-grid">
+      <label>
+        Tracking Code
+        <input type="text" name="trackingCode" placeholder="TRK-ABC123" required />
+      </label>
+      <button type="submit" class="btn btn-primary">Track Now</button>
+    </form>
+
+    <% if (error) { %>
+      <div class="alert error"><%= error %></div>
+    <% } %>
+
+    <% if (order) { %>
+      <div class="card nested-card">
+        <h3>Order <%= order.order_number %></h3>
+        <p><strong>Tracking:</strong> <%= order.tracking_code %></p>
+        <p><strong>Status:</strong> <span class="status-highlight"><%= computedStatus %></span></p>
+        <p><strong>Created:</strong> <%= new Date(order.created_at).toLocaleString() %></p>
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

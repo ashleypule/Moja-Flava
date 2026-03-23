@@ -1,0 +1,42 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container page-space">
+  <div class="page-header">
+    <h2>Order Tracking</h2>
+    <p class="muted">Order <strong><%= order.order_number %></strong> · Tracking code <strong><%= order.tracking_code %></strong></p>
+  </div>
+
+  <section class="card tracking-card">
+    <h3>Current Status: <span class="status-highlight"><%= computedStatus %></span></h3>
+    <div class="timeline">
+      <div class="timeline-step <%= ['Payment Confirmed','Preparing','Out for Delivery','Delivered'].includes(computedStatus) ? 'active' : '' %>">Payment Confirmed</div>
+      <div class="timeline-step <%= ['Preparing','Out for Delivery','Delivered'].includes(computedStatus) ? 'active' : '' %>">Preparing</div>
+      <div class="timeline-step <%= ['Out for Delivery','Delivered'].includes(computedStatus) ? 'active' : '' %>">Out for Delivery</div>
+      <div class="timeline-step <%= computedStatus === 'Delivered' ? 'active' : '' %>">Delivered</div>
+    </div>
+  </section>
+
+  <div class="checkout-layout">
+    <section class="card">
+      <h3>Items</h3>
+      <% items.forEach((item) => { %>
+        <div class="summary-row">
+          <span><%= item.quantity %> × <%= item.name %></span>
+          <strong>R <%= Number(item.lineTotal).toFixed(2) %></strong>
+        </div>
+      <% }) %>
+    </section>
+
+    <aside class="card summary-card">
+      <h3>Delivery</h3>
+      <p><strong>Address:</strong> <%= order.address_line %></p>
+      <p><strong>City:</strong> <%= order.city %></p>
+      <p><strong>Notes:</strong> <%= order.notes || 'None' %></p>
+      <p><strong>Payment:</strong> <%= order.payment_provider || 'Pending' %></p>
+      <p><strong>Total:</strong> R <%= Number(order.total).toFixed(2) %></p>
+    </aside>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

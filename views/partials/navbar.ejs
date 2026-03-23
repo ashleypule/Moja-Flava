@@ -1,0 +1,31 @@
+<header class="topbar">
+  <div class="container nav-wrap">
+    <a href="/" class="logo">
+      <img src="/images/logo.png" alt="Moja Flava logo" class="brand-logo" />
+      <span>Moja <strong>Flava</strong></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/menu">Menu</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/track">Track Order</a>
+      <% if (currentUser && currentUser.id) { %>
+        <a href="/orders">My Orders</a>
+        <a href="/cart" class="cart-pill"><i class="bi bi-cart3"></i> Cart (<%= cartCount %>)</a>
+      <% } %>
+    </nav>
+
+    <div class="auth-actions">
+      <% if (currentUser && currentUser.id) { %>
+        <span class="welcome">Hi, <%= currentUser.name %></span>
+        <form method="post" action="/logout">
+          <button type="submit" class="btn btn-outline">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login" class="btn btn-outline">Login</a>
+        <a href="/signup" class="btn btn-primary">Sign Up</a>
+      <% } %>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,36 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<main class="container page-space">
+  <div class="page-header">
+    <h2>My Orders</h2>
+    <p class="muted">View your order history and tracking links.</p>
+  </div>
+
+  <% if (!orders.length) { %>
+    <section class="card empty-state">
+      <h3>No orders yet</h3>
+      <p>Your placed orders will appear here.</p>
+      <a href="/menu" class="btn btn-primary">Start Ordering</a>
+    </section>
+  <% } else { %>
+    <section class="card">
+      <% orders.forEach((order) => { %>
+        <article class="order-row">
+          <div>
+            <h4><%= order.order_number %></h4>
+            <p class="muted">Tracking: <strong><%= order.tracking_code %></strong></p>
+          </div>
+          <div>
+            <span class="pill"><%= order.computedStatus %></span>
+            <p class="muted"><%= new Date(order.created_at).toLocaleString() %></p>
+          </div>
+          <strong>R <%= Number(order.total).toFixed(2) %></strong>
+          <a href="/orders/<%= order.tracking_code %>" class="btn btn-outline">Trace Order</a>
+        </article>
+      <% }) %>
+    </section>
+  <% } %>
+</main>
+
+<%- include('../partials/footer') %>
