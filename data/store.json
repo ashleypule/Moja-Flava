@@ -6,6 +6,13 @@
       "email": "viddie@gmail.com",
       "password_hash": "$2a$10$XJ1XvgtekhNrb99RXgGb7OeGYb2n2HEh14on1e5o8bMnMmhu4lkIm",
       "created_at": "2026-03-19T14:46:34.618Z"
+    },
+    {
+      "id": 2,
+      "full_name": "Order Tester",
+      "email": "ordertest1774257384@example.com",
+      "password_hash": "$2a$10$9V4zPoicP48BYFcs8OW0IO76C6h5UcIvI02czroMQ79z.yDT.h5Ra",
+      "created_at": "2026-03-23T09:16:24.390Z"
     }
   ],
   "menu_items": [
@@ -99,12 +106,46 @@
       "city": "Pretoria",
       "notes": null,
       "created_at": "2026-03-19T15:11:35.647Z"
+    },
+    {
+      "id": 2,
+      "order_number": "MF-57401429",
+      "tracking_code": "TRK-D85595",
+      "user_id": 2,
+      "items_json": "[{\"id\":1,\"name\":\"Signature BBQ Wings\",\"description\":\"Smoky grilled wings with house BBQ glaze\",\"price\":89.99,\"category\":\"Main\",\"image\":\"bbqwings.avif\",\"quantity\":1,\"lineTotal\":89.99}]",
+      "subtotal": 89.99,
+      "delivery_fee": 20,
+      "total": 109.99,
+      "payment_provider": null,
+      "payment_status": "pending",
+      "order_status": "Awaiting Payment",
+      "address_line": "123 Main Street",
+      "city": "Johannesburg",
+      "notes": "Gate 4",
+      "created_at": "2026-03-23T09:16:41.429Z"
+    },
+    {
+      "id": 3,
+      "order_number": "MF-57558560",
+      "tracking_code": "TRK-170221",
+      "user_id": 1,
+      "items_json": "[{\"id\":5,\"name\":\"Family Feast Platter\",\"description\":\"Mixed meats, fries, salads and dips\",\"price\":249.99,\"category\":\"Combo\",\"image\":\"familyplatter.jpg\",\"quantity\":1,\"lineTotal\":249.99},{\"id\":7,\"name\":\"Classic Milkshake\",\"description\":\"Creamy vanilla shake with whipped topping\",\"price\":39.99,\"category\":\"Drinks\",\"image\":\"milkshake.jpg\",\"quantity\":1,\"lineTotal\":39.99},{\"id\":8,\"name\":\"Tropical Cooler\",\"description\":\"Fresh pineapple, mint and citrus fizz\",\"price\":34.99,\"category\":\"Drinks\",\"image\":\"tropicalcooler.webp\",\"quantity\":1,\"lineTotal\":34.99}]",
+      "subtotal": 324.97,
+      "delivery_fee": 20,
+      "total": 344.97,
+      "payment_provider": null,
+      "payment_status": "pending",
+      "order_status": "Awaiting Payment",
+      "address_line": "TUT Aubrey matla",
+      "city": "Pretoria",
+      "notes": null,
+      "created_at": "2026-03-23T09:19:18.561Z"
     }
   ],
   "counters": {
-    "users": 2,
+    "users": 3,
     "menu_items": 10,
-    "orders": 2,
+    "orders": 4,
     "reviews": 2
   },
   "reviews": [

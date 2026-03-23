@@ -2,14 +2,17 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const { initializeDatabase } = require('./db/database');
 const { publicRouter } = require('./routes/publicRoutes');
 const { authRouter } = require('./routes/authRoutes');
 const { appRouter } = require('./routes/appRoutes');
 
 const app = express();
-const PORT = Number(process.env.PORT || 3000);
+
+const dbReadyPromise = initializeDatabase();
+
+app.set('trust proxy', 1);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'views'));
@@ -18,15 +21,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'development_secret_change_me',
-    resave: false,
-    saveUninitialized: false,
+  cookieSession({
+    name: 'moja_flava_session',
+    keys: [process.env.SESSION_SECRET || 'development_secret_change_me'],
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24
+      maxAge: 1000 * 60 * 60 * 24,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true
     }
   })
 );
+
+app.use(async (req, res, next) => {
+  try {
+    await dbReadyPromise;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.use((req, res, next) => {
   const cart = req.session.cart || {};
@@ -49,13 +63,4 @@ app.use((error, req, res, next) => {
   res.status(500).send('Something went wrong. Please try again.');
 });
 
-initializeDatabase()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Moja Flava app running at http://localhost:${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error('Failed to initialize database', error);
-    process.exit(1);
-  });
+module.exports = app;

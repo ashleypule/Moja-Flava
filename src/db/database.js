@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataFilePath = path.join(__dirname, '..', '..', 'data', 'store.json');
+const defaultDataFilePath = path.join(__dirname, '..', '..', 'data', 'store.json');
+const dataFilePath = process.env.DATA_FILE_PATH
+  ? path.resolve(process.env.DATA_FILE_PATH)
+  : (process.env.VERCEL ? '/tmp/store.json' : defaultDataFilePath);
 
 const MENU_CATALOG = [
   {

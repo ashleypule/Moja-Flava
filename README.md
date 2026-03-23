@@ -56,6 +56,25 @@ npm start
   - **PayPal (test)**
 - Clicking either marks payment as `paid_test` (simulation only).
 
+## Deploying on Vercel
+
+- This project now includes `vercel.json` and a serverless entry at `api/index.js`.
+- Local runs still use `src/server.js` (`npm start` / `npm run dev`).
+- In Vercel, routes are handled by the exported Express app (`src/app.js`) without `app.listen(...)`.
+
+### Required Environment Variables
+
+- `SESSION_SECRET` (required)
+- `NODE_ENV=production`
+- `PAYSTACK_PUBLIC_KEY` (optional, test key)
+- `PAYPAL_CLIENT_ID` (optional, sandbox id)
+
+### Data Persistence Note
+
+- On Vercel, JSON data is written to `/tmp/store.json`.
+- `/tmp` is ephemeral and may reset between cold starts, so production-grade persistence should use a managed database.
+- You can override the JSON path with `DATA_FILE_PATH` if your host provides writable persistent storage.
+
 ## Order Tracking
 
 - Users can open **My Orders** after login to trace details.
